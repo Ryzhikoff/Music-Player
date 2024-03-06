@@ -1,21 +1,17 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
 }
 
 android {
-    namespace = "com.example.musicplayer"
+    namespace = "com.example.core"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.musicplayer"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -31,22 +27,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 dependencies {
+
     implementation(AndroidX.core)
     implementation(AndroidX.appcompat)
     implementation(AndroidX.material)
-
-    implementation(AndroidX.Navigation.ui)
-    implementation(AndroidX.Navigation.fragment)
-
-    implementation(Dagger.daggerCore)
-    ksp(Dagger.daggerCompiler)
-
-    implementation(project(":feature_playlists"))
 }
