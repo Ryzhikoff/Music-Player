@@ -3,14 +3,17 @@ package com.example.feature_playlists.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.feature_playlists.R
 import com.example.feature_playlists.databinding.FragmentPlaylistsBinding
-import com.example.feature_playlists.models.PlaylistUi
+import com.example.feature_playlists.di.PlaylistsComponentProvider
 import com.example.feature_playlists.ui.rv.PlaylistAdapter
 import com.example.feature_playlists.ui.rv.SpacingItemDecoration
-import kotlin.random.Random
+import com.example.feature_playlists.utils.PlaylistsViewModeFactory
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class PlaylistsFragment : Fragment(R.layout.fragment_playlists) {
     private var _binding: FragmentPlaylistsBinding? = null
@@ -22,13 +25,25 @@ class PlaylistsFragment : Fragment(R.layout.fragment_playlists) {
 
     private val adapter = PlaylistAdapter(onItemClickListener)
 
+    @Inject
+    lateinit var viewModelProvider: PlaylistsViewModeFactory
+    private val viewModel: PlaylistsViewModel by viewModels { viewModelProvider }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPlaylistsBinding.bind(view)
 
-        println("PlaylistsFragment onViewCreated")
+        (requireActivity().application as PlaylistsComponentProvider)
+            .getPlaylistsComponent()
+            .inject(this)
+
         initRecyclerView()
-        addFakeData()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.playlists.collectLatest {
+                adapter.submitData(lifecycle, it)
+            }
+        }
     }
 
     private fun initRecyclerView() {
@@ -44,20 +59,6 @@ class PlaylistsFragment : Fragment(R.layout.fragment_playlists) {
                 )
             )
         }
-    }
-
-    private fun addFakeData() {
-        val list = mutableListOf<PlaylistUi>()
-        repeat(100) {
-            list.add(
-                PlaylistUi(
-                    id = it,
-                    name = "PLaylist Names",
-                    imageUrl = "https://my.enter.yoga/upload/covers/playlists/image_image_352_55034_cover_839_83564.png"
-                )
-            )
-        }
-        adapter.submitList(list)
     }
 
     override fun onDestroyView() {

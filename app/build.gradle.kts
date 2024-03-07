@@ -46,6 +46,7 @@ dependencies {
     implementation(AndroidX.Navigation.fragment)
 
     implementation(Dagger.daggerCore)
+    implementation(project(":remote"))
     ksp(Dagger.daggerCompiler)
 
     implementation(project(":feature_playlists"))

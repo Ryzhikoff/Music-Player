@@ -32,6 +32,8 @@ android {
 
 dependencies {
 
+    implementation(AndroidX.paging)
+
     implementation(Retrofit.retrofit)
     implementation(Retrofit.logging)
     implementation(Retrofit.converter)

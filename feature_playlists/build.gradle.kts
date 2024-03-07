@@ -39,11 +39,14 @@ dependencies {
     implementation(AndroidX.core)
     implementation(AndroidX.appcompat)
     implementation(AndroidX.material)
+    implementation(AndroidX.paging)
+    implementation(Retrofit.retrofit)
 
     implementation(AndroidX.Navigation.ui)
     implementation(AndroidX.Navigation.fragment)
 
     implementation(Dagger.daggerCore)
+    implementation(project(":remote"))
     ksp(Dagger.daggerCompiler)
 
     implementation(Glide.core)

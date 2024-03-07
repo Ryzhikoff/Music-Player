@@ -3,39 +3,29 @@ package com.example.feature_playlists.ui.rv
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.feature_playlists.R
 import com.example.feature_playlists.databinding.CardPlaylistBinding
-import com.example.feature_playlists.models.PlaylistUi
+import com.example.remote.models.ui.PlaylistUi
 
 class PlaylistAdapter(
     private val onItemClickListener: OnItemClickListener,
-) : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>() {
-
-    private var items: MutableList<PlaylistUi> = mutableListOf()
+) : PagingDataAdapter<PlaylistUi, PlaylistAdapter.ViewHolder>(PlaylistUiDiffItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.card_playlist, parent, false)
-
         )
     }
 
-
-    override fun getItemCount(): Int = items.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.init(items[position])
-    }
-
-    fun submitList(newList: List<PlaylistUi>) {
-        val diff = PlaylistsDiff(items, newList)
-        val diffResult = DiffUtil.calculateDiff(diff)
-        items.addAll(newList)
-        diffResult.dispatchUpdatesTo(this)
+        getItem(position)?.let { playlistUi ->
+            holder.init(playlistUi)
+        }
     }
 
     inner class ViewHolder(
@@ -64,19 +54,14 @@ class PlaylistAdapter(
         fun onClick(playlistUi: PlaylistUi)
     }
 
-    private class PlaylistsDiff(
-        private val oldList: List<PlaylistUi>,
-        private val newList: List<PlaylistUi>,
-    ) : DiffUtil.Callback() {
-        override fun getOldListSize(): Int = oldList.size
+    private object PlaylistUiDiffItemCallback : DiffUtil.ItemCallback<PlaylistUi>() {
 
-        override fun getNewListSize(): Int = newList.size
+        override fun areItemsTheSame(oldItem: PlaylistUi, newItem: PlaylistUi): Boolean {
+            return oldItem == newItem
+        }
 
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-            oldList[oldItemPosition].id == newList[newItemPosition].id
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-            oldList[oldItemPosition] == newList[newItemPosition]
-
+        override fun areContentsTheSame(oldItem: PlaylistUi, newItem: PlaylistUi): Boolean {
+            return oldItem.id == newItem.id
+        }
     }
 }
