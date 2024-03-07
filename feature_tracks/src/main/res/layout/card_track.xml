@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/smooth">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/card_track_image_size"
+        android:layout_height="@dimen/card_track_image_size"
+        android:layout_marginVertical="8dp"
+        android:layout_marginStart="@dimen/card_track_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/name"
+        style="@style/TitleBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/card_track_margin"
+        android:layout_marginEnd="@dimen/card_track_margin"
+        android:textColor="@color/primary"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/author"
+        app:layout_constraintEnd_toStartOf="@id/actionButton"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Boys like you" />
+
+    <TextView
+        android:id="@+id/author"
+        style="@style/SubtitleBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/card_track_margin"
+        android:layout_marginEnd="@dimen/card_track_margin"
+        android:textColor="@color/primary"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/actionButton"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/image"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        tools:text="Gracie Yates" />
+
+    <ImageView
+        android:id="@+id/actionButton"
+        android:layout_width="@dimen/card_track_image_size"
+        android:layout_height="@dimen/card_track_image_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="@dimen/card_track_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/action_button_state"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

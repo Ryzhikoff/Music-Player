@@ -3,14 +3,20 @@ package com.example.feature_playlists.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import com.example.feature_playlists.R
 import com.example.feature_playlists.databinding.FragmentPlaylistsBinding
 import com.example.feature_playlists.di.PlaylistsComponentProvider
 import com.example.feature_playlists.ui.rv.PlaylistAdapter
-import com.example.feature_playlists.ui.rv.SpacingItemDecoration
+import com.example.core.ui.rv.SpacingItemDecoration
 import com.example.feature_playlists.utils.PlaylistsViewModeFactory
+import com.example.features_tracks.ui.TracksFragment.Companion.KEY_PLAYLIST_ID
+import com.example.remote.models.ui.PlaylistUi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +26,7 @@ class PlaylistsFragment : Fragment(R.layout.fragment_playlists) {
     private val binding get() = _binding!!
 
     private val onItemClickListener = PlaylistAdapter.OnItemClickListener {
-        println(it)
+        navigateToTracks(it)
     }
 
     private val adapter = PlaylistAdapter(onItemClickListener)
@@ -44,6 +50,7 @@ class PlaylistsFragment : Fragment(R.layout.fragment_playlists) {
                 adapter.submitData(lifecycle, it)
             }
         }
+
     }
 
     private fun initRecyclerView() {
@@ -59,6 +66,20 @@ class PlaylistsFragment : Fragment(R.layout.fragment_playlists) {
                 )
             )
         }
+
+        adapter.addLoadStateListener { state ->
+            with(binding) {
+                recyclerView.isVisible = state.refresh != LoadState.Loading
+                progressBar.isVisible = state.refresh == LoadState.Loading
+            }
+        }
+    }
+
+    private fun navigateToTracks(playlistUi: PlaylistUi) {
+        findNavController().navigate(
+            R.id.action_playlistsFragment_to_tracksFragment,
+            bundleOf(Pair(KEY_PLAYLIST_ID, playlistUi.id))
+        )
     }
 
     override fun onDestroyView() {

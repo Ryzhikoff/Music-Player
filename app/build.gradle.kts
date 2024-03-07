@@ -47,6 +47,7 @@ dependencies {
 
     implementation(Dagger.daggerCore)
     implementation(project(":remote"))
+    implementation(project(":feature_tracks"))
     ksp(Dagger.daggerCompiler)
 
     implementation(project(":feature_playlists"))

@@ -3,9 +3,9 @@ package com.example.remote.di.modules
 import androidx.paging.PagingSource
 import com.example.remote.data.ApiConstants
 import com.example.remote.data.OnwaveApi
-import com.example.remote.data.OnwavePagingSource
-import com.example.remote.data.repositories.PlaylistsRepositoriesImpl
-import com.example.remote.data.repositories.PlaylistsRepository
+import com.example.remote.data.PlaylistsPagingSource
+import com.example.remote.data.repositories.OnwaveRepositoriesImpl
+import com.example.remote.data.repositories.OnwaveRepository
 import com.example.remote.models.ui.PlaylistUi
 import dagger.Module
 import dagger.Provides
@@ -43,12 +43,12 @@ class RemoteModule {
 
     @Singleton
     @Provides
-    fun provideRepository(onwaveApi: OnwaveApi): PlaylistsRepository =
-        PlaylistsRepositoriesImpl(onwaveApi)
+    fun provideRepository(onwaveApi: OnwaveApi): OnwaveRepository =
+        OnwaveRepositoriesImpl(onwaveApi)
 
     @Singleton
     @Provides
-    fun providePagingSource(repository: PlaylistsRepository): PagingSource<Int, PlaylistUi> =
-        OnwavePagingSource(repository)
+    fun providePagingSource(repository: OnwaveRepository): PagingSource<Int, PlaylistUi> =
+        PlaylistsPagingSource(repository)
 
 }

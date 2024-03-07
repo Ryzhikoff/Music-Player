@@ -36,10 +36,12 @@ class PlaylistAdapter(
             CardPlaylistBinding.bind(view).apply {
                 name.text = playlistUi.name
 
-                Glide.with(view)
-                    .load(playlistUi.imageUrl)
-                    .centerCrop()
-                    .into(image)
+                playlistUi.imageUrl?.let { url ->
+                    Glide.with(view)
+                        .load(url)
+                        .centerCrop()
+                        .into(image)
+                }
 
                 root.setOnClickListener {
                     onItemClickListener.onClick(playlistUi)

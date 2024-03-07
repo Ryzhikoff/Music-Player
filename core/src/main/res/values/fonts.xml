@@ -8,12 +8,22 @@
         <item name="fontFamily">@font/roboto_bold</item>
     </style>
     
-    <style name="Title">
+    <style name="Title" parent="BaseRobotoMedium">
         <item name="android:textSize">14sp</item>
         <item name="android:letterSpacing">-0.028</item>
     </style>
 
-    <style name="Subtitle">
+    <style name="Subtitle" parent="BaseRobotoMedium">
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">-0.028</item>
+    </style>
+
+    <style name="TitleBold" parent="BaseRobotoBold">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">-0.028</item>
+    </style>
+
+    <style name="SubtitleBold" parent="BaseRobotoBold">
         <item name="android:textSize">10sp</item>
         <item name="android:letterSpacing">-0.028</item>
     </style>

@@ -2,16 +2,16 @@ package com.example.remote.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.remote.data.repositories.PlaylistsRepository
+import com.example.remote.data.repositories.OnwaveRepository
 import com.example.remote.models.mappers.toPlaylistsUi
 import com.example.remote.models.ui.PlaylistUi
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class OnwavePagingSource @Inject constructor(
-    private val repository: PlaylistsRepository,
+class PlaylistsPagingSource @Inject constructor(
+    private val repository: OnwaveRepository,
 
-) : PagingSource<Int, PlaylistUi>() {
+    ) : PagingSource<Int, PlaylistUi>() {
     override fun getRefreshKey(state: PagingState<Int, PlaylistUi>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
         val page = state.closestPageToPosition(anchorPosition) ?: return null

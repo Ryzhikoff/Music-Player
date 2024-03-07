@@ -14,9 +14,8 @@
         android:fadingEdge="horizontal"
         android:fadingEdgeLength="8dp"
         android:requiresFadingEdge="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        tools:listitem="@layout/card_playlist" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/card_track" />
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -1,4 +1,4 @@
-package com.example.feature_playlists.ui.rv
+package com.example.core.ui.rv
 
 import android.content.res.Resources
 import android.graphics.Rect
