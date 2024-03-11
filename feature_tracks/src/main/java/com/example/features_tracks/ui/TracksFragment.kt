@@ -5,15 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.example.core.ui.rv.SpacingItemDecoration
+import com.example.feature_player.domain.MediaPlayerState
+import com.example.feature_player.domain.PlayerController
 import com.example.features_tracks.R
 import com.example.features_tracks.databinding.FragmentTracksBinding
 import com.example.features_tracks.di.TrackComponentProvider
 import com.example.features_tracks.ui.rv.TracksAdapter
 import com.example.features_tracks.utils.TracksViewModeFactory
+import com.example.core.ui.models.TrackUi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,10 +24,28 @@ class TracksFragment : Fragment(R.layout.fragment_tracks) {
     private var _binding: FragmentTracksBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter = TracksAdapter()
+    private val onActionClickListener = object : TracksAdapter.OnActionClickListener {
+        override fun onClick(trackUrl: TrackUi) {
+            onActionClick(trackUrl)
+        }
+    }
+
+    private val onStopClickListener = object : TracksAdapter.OnStopClickListener {
+        override fun onClick(trackUrl: TrackUi) {
+            onStopClick(trackUrl)
+        }
+
+    }
+
+    private val adapter by lazy {
+        TracksAdapter(onActionClickListener, onStopClickListener, lifecycleScope)
+    }
 
     @Inject
     lateinit var viewModelFactory: TracksViewModeFactory
+
+    @Inject
+    lateinit var playerController: PlayerController
 
     private val viewModel: TracksViewModel by viewModels { viewModelFactory}
 
@@ -65,6 +85,14 @@ class TracksFragment : Fragment(R.layout.fragment_tracks) {
                 progressBar.isVisible = state.refresh == LoadState.Loading
             }
         }
+    }
+
+    private fun onActionClick(trackUi: TrackUi) {
+        playerController.play(trackUi)
+    }
+
+    private fun onStopClick(trackUrl: TrackUi) {
+        playerController.stop(trackUrl)
     }
 
     override fun onDestroyView() {

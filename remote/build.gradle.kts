@@ -39,5 +39,6 @@ dependencies {
     implementation(Retrofit.converter)
 
     implementation(Dagger.daggerCore)
+    implementation(project(":core"))
     ksp(Dagger.daggerCompiler)
 }

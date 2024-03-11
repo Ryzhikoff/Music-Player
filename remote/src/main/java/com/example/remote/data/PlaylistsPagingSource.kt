@@ -34,6 +34,6 @@ class PlaylistsPagingSource @Inject constructor(
 
     private companion object {
         const val INITIAL_PAGE_NUMBER = 1
-        const val PAGE_SIZE = 20
+        const val PAGE_SIZE = 30
     }
 }

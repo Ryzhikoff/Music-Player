@@ -46,10 +46,11 @@ dependencies {
     implementation(AndroidX.Navigation.fragment)
 
     implementation(Dagger.daggerCore)
-    implementation(project(":remote"))
     ksp(Dagger.daggerCompiler)
 
     implementation(Glide.core)
 
+    implementation(project(":remote"))
     implementation(project(":core"))
+    implementation(project(":feature_player"))
 }

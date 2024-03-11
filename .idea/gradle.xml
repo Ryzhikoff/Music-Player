@@ -23,6 +23,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/feature_player" />
             <option value="$PROJECT_DIR$/feature_playlists" />
             <option value="$PROJECT_DIR$/feature_tracks" />
             <option value="$PROJECT_DIR$/remote" />

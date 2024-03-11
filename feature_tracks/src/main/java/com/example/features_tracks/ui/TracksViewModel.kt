@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.example.remote.domain.GetTracksFromPlaylistUseCase
-import com.example.remote.models.ui.TracksUi
+import com.example.core.ui.models.TrackUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,8 +16,8 @@ class TracksViewModel @Inject constructor(
     private val getTracksFromPlaylistUseCase: GetTracksFromPlaylistUseCase
 ): ViewModel() {
 
-    private val _tracksFlow: MutableStateFlow<PagingData<TracksUi>> = MutableStateFlow(PagingData.empty())
-    val tracksFlow: StateFlow<PagingData<TracksUi>> = _tracksFlow.asStateFlow()
+    private val _tracksFlow: MutableStateFlow<PagingData<TrackUi>> = MutableStateFlow(PagingData.empty())
+    val tracksFlow: StateFlow<PagingData<TrackUi>> = _tracksFlow.asStateFlow()
 
     fun getTracks(playlistId: Int) {
         viewModelScope.launch {
