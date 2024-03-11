@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showPlayer(trackUi: TrackUi) {
-        println("MainActivity showPlayer trackUi.isPlayeing ${trackUi.isPlaying} ")
         binding.player.apply {
             if (!isVisible) {
                 isVisible = true
@@ -77,7 +76,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pause(trackUi: TrackUi) {
-        println("MainActivity PAUSE - trackUi.isPlaying ${trackUi.isPlaying}")
         binding.player.setContent(trackUi)
     }
 

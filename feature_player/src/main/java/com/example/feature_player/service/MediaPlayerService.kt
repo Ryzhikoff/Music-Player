@@ -60,7 +60,7 @@ class MediaPlayerService : Service() {
         val pendingIntent = PendingIntent.getActivity(this, REQUEST_CODE, intent, PendingIntent.FLAG_IMMUTABLE)
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("Cool title")
+            .setContentTitle("Music player")
             .setContentText("PLaying")
             .setContentIntent(pendingIntent)
             .setOngoing(true)
@@ -113,7 +113,6 @@ class MediaPlayerService : Service() {
 
     private fun startNewTrack(trackUi: TrackUi) {
 
-        println("MediaPlayerService startNewTrack url - ${trackUi.name}")
         mediaPlayer.apply {
             reset()
             setDataSource(applicationContext, Uri.parse(trackUi.trackUrl))
@@ -147,11 +146,10 @@ class MediaPlayerService : Service() {
     }
 
     companion object {
-        const val CHANNEL_ID = "CHANNEL_UPDATE_DB"
-        const val CHANNEL_DESCRIPTION = "Channel for update Database in app CallStatistic"
+        const val CHANNEL_ID = "CHANNEL_MUSIC_PLAYER"
+        const val CHANNEL_DESCRIPTION = "Channel for Music PLayer"
         const val NOTIFICATION_ID = 1
         const val REQUEST_CODE = 0
-        const val KEY_TRACK_URL = "key_track_url"
         const val KEY_ACTIVITY_CLASS = "key_activity_class"
     }
 }

@@ -8,7 +8,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.example.core.ui.rv.SpacingItemDecoration
-import com.example.feature_player.domain.MediaPlayerState
 import com.example.feature_player.domain.PlayerController
 import com.example.features_tracks.R
 import com.example.features_tracks.databinding.FragmentTracksBinding

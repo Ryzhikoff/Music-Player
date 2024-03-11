@@ -6,7 +6,6 @@ import android.content.Intent
 import com.example.core.ui.models.TrackUi
 import com.example.feature_player.service.MediaPlayerService
 import com.example.feature_player.service.MediaPlayerService.Companion.KEY_ACTIVITY_CLASS
-import com.example.feature_player.service.MediaPlayerService.Companion.KEY_TRACK_URL
 import com.example.feature_player.utils.isServiceRunning
 import javax.inject.Inject
 
@@ -17,7 +16,6 @@ class PlayerController @Inject constructor(
 
 
     fun play(trackUi: TrackUi) {
-        println("PlayerController play  trackUi.id - ${trackUi.id} currentTrackId $currentTrackId")
         if (!isServiceRunning(context, MediaPlayerService::class.java)) {
             currentTrackId = trackUi.id
             val serviceIntent = Intent(context, MediaPlayerService::class.java).apply {
@@ -27,7 +25,6 @@ class PlayerController @Inject constructor(
             MediaPlayerState.preparingPlay(trackUi)
         } else {
             if (trackUi.id == currentTrackId && !paused) {
-                println("PlayerController need pause")
                 paused = true
                 MediaPlayerState.pause(trackUi)
             } else if (trackUi.id == currentTrackId && paused) {
@@ -35,7 +32,6 @@ class PlayerController @Inject constructor(
                 MediaPlayerState.playing(trackUi)
             } else {
                 paused = false
-                println("PlayerController START new track")
                 MediaPlayerState.preparingPlay(trackUi)
             }
             currentTrackId = trackUi.id
