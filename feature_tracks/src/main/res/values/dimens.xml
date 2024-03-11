@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_track_image_size">50dp</dimen>
+    <dimen name="card_track_margin">20dp</dimen>
+    <dimen name="margin_recyclerview">8dp</dimen>
+</resources>

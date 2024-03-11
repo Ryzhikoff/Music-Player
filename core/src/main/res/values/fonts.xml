@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BaseRobotoMedium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    
+    <style name="BaseRobotoBold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+    
+    <style name="Title" parent="BaseRobotoMedium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">-0.028</item>
+    </style>
+
+    <style name="Subtitle" parent="BaseRobotoMedium">
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">-0.028</item>
+    </style>
+
+    <style name="TitleBold" parent="BaseRobotoBold">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">-0.028</item>
+    </style>
+
+    <style name="SubtitleBold" parent="BaseRobotoBold">
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">-0.028</item>
+    </style>
+</resources>

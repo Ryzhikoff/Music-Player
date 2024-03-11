@@ -15,4 +15,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "Music Player"
 include(":app")
- 
+include(":feature_playlists")
+include(":core")
+include(":remote")
+include(":feature_tracks")
+include(":feature_player")

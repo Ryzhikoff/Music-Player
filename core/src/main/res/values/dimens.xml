@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_playlist_corner_radius">8dp</dimen>
+    <dimen name="card_playlist_image_height">100dp</dimen>
+    <dimen name="icon_size">36dp</dimen>
+    <dimen name="progressbar_size">50dp</dimen>
+</resources>
